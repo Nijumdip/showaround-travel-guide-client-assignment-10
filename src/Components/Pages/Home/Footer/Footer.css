@@ -1,0 +1,12 @@
+.bottom-style {
+    background-color: #0E5C8E;
+    padding: 10px;
+  }
+  .bottom-style h3 {
+    color: #fafafa;
+    font-size: 30px;
+    font-weight: bold;
+  }
+  .bottom-style p, h5, h6 {
+    color: #ffffff;
+  }
