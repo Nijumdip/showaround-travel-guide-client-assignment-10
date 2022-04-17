@@ -22,7 +22,7 @@ const Login = () => {
             Login
         </Button>
       </Form>
-      <p>New To Showaround Travel Guide ? <Link to='/register' className="text-primary text-decoration-none">Please Register</Link></p>
+      <p>New To Showaround Travel Guide ? <Link to='/signup' className="text-primary text-decoration-none">Please Register</Link></p>
       <p>Forget Password ? <button  className="btn btn-link text-primary text-decoration-none">Reset Password</button></p>
     </div>
     );

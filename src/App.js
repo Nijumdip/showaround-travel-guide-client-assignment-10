@@ -7,6 +7,7 @@ import Home from "./Components/Pages/Home/Home/Home";
 import Login from "./Components/Pages/Login/Login";
 import Services from "./Components/Pages/Services/Services";
 import PageNotFound from "./Components/Shared/PageNotFound/PageNotFound";
+import SignUp from "./Components/Pages/Login/SignUp";
 
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
           <Route path="/checkout" element={<CheckOut/>}/>
           <Route path="/blog" element={<Blog/>}/>
           <Route path="/login" element={<Login/>}/>
+          <Route path="/signup" element={<SignUp/>}/>
           <Route path="*" element={<PageNotFound/>}/>
         </Routes>
       </BrowserRouter>
