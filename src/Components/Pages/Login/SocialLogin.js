@@ -1,18 +1,19 @@
 import React from 'react';
 import { Button } from 'react-bootstrap';
-import { useSignInWithGoogle } from 'react-firebase-hooks/auth';
+import { useSignInWithGoogle, useSignInWithGithub } from 'react-firebase-hooks/auth';
 import { useNavigate } from 'react-router-dom';
 import auth from '../../../firebase.init';
 
 const SocialLogin = () => {
     const [signInWithGoogle, user, loading, error] = useSignInWithGoogle(auth);
+    const [signInWithGithub, githubUser, githubLoading, githubError] = useSignInWithGithub(auth);
     const navigate = useNavigate();
     let errorElement;
 
-    if (error) {
-        errorElement= <div><p className='text-danger'>Error: {error.message}</p></div>
+    if (error || githubError) {
+        errorElement = <div><p className='text-danger'>Error: {error?.message}{githubError?.message}</p></div>
     }
-    if (user) {
+    if (user || githubUser) {
         navigate('/home')
     }
     return (
@@ -35,6 +36,7 @@ const SocialLogin = () => {
                     <span className='px-3'>Facebook Sign In</span>
                 </Button>
                 <Button
+                    onClick={()=>signInWithGithub()}
                     className='w-50 m-2 d-block mx-auto' variant="secondary">
                     <img style={{width:'30px'}} src="https://octodex.github.com/images/Professortocat_v2.png" alt="" />
                     <span className='px-3'>Github Sign In</span>
