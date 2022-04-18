@@ -6,7 +6,10 @@ import {
 } from "react-firebase-hooks/auth";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import auth from "../../../firebase.init";
+import Loading from "../../Shared/Loading/Loading";
 import SocialLogin from "./SocialLogin";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Login = () => {
   const emailRef = useRef("");
@@ -18,6 +21,10 @@ const Login = () => {
     useSignInWithEmailAndPassword(auth);
   const [sendPasswordResetEmail, sending] = useSendPasswordResetEmail(auth);
   let errorElement;
+
+  if (loading || sending) {
+    return <Loading></Loading>;
+  }
 
   if (error) {
     errorElement = (
@@ -32,8 +39,14 @@ const Login = () => {
   }
 
   const resetPassword = async () => {
-    await sendPasswordResetEmail(emailRef);
-    alert("Sent email");
+    const email = emailRef.current.value;
+    if (email) {
+      await sendPasswordResetEmail(email);
+      toast('Sent email');
+    }
+    else {
+      toast('please enter your email address');
+    } 
   };
 
   const handleSubmit = (event) => {
@@ -84,6 +97,7 @@ const Login = () => {
         </button>
       </p>
       <SocialLogin></SocialLogin>
+      <ToastContainer />
     </div>
   );
 };
