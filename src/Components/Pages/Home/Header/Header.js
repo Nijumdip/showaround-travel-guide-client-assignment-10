@@ -1,10 +1,14 @@
+import { signOut } from "firebase/auth";
 import React from "react";
-import { Container, Nav, Navbar } from "react-bootstrap";
+import { Button, Container, Nav, Navbar } from "react-bootstrap";
+import { useAuthState } from "react-firebase-hooks/auth";
 import { Link } from "react-router-dom";
+import auth from "../../../../firebase.init";
 import './Header.css';
 
 
 const Header = () => {
+  const [user] = useAuthState(auth);
   return (
     <Navbar bg="primary" variant="dark" sticky="top" expand="lg">
       <Container>
@@ -16,12 +20,13 @@ const Header = () => {
             <Link to="/services">Services</Link>
             <Link to="/checkout">CheckOut</Link>
             <Link to="/blog">Blog</Link>
-            <Link to="/login">Login</Link>
-            {/* <CustomLink to="/">Home</CustomLink>
-            <CustomLink to="/services">Services</CustomLink>
-            <CustomLink to="/blogs">Blogs</CustomLink>
-            <CustomLink to="/about">About us</CustomLink>
-            <CustomLink to="/Login">Login</CustomLink> */}
+            <span className="displayName mx-2">{user?.displayName && user.displayName}</span>
+            {
+              user?.uid ?
+              <Button onClick={() => signOut(auth)} variant="primary">Sign Out</Button>
+              :
+              <Link to="login">Login</Link>  
+            }
           </Nav>
         </Navbar.Collapse>
       </Container>
