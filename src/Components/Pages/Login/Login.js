@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 import SocialLogin from "./SocialLogin";
 
 const Login = () => {
+  
+
   return (
     <div className="container w-50 mx-auto m-5">
       <h2 className="text-primary text-center ">Please Login</h2>
@@ -20,13 +22,13 @@ const Login = () => {
         </Button>
       </Form>
       <p>
-        New To Showaround Travel Guide ?{" "}
+        New To Showaround Travel Guide ?
         <Link to="/signup" className="text-primary text-decoration-none">
           Please Register
         </Link>
       </p>
       <p>
-        Forget Password ?{" "}
+        Forget Password ?
         <button className="btn btn-link text-primary text-decoration-none">
           Reset Password
         </button>

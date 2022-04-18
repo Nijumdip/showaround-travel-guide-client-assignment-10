@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { Button, Card, Col, Container, Row } from "react-bootstrap";
+import { useNavigate } from 'react-router-dom';
 
 const Services = () => {
   const [services, setServices] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetch("./services.json")
@@ -10,6 +12,9 @@ const Services = () => {
       .then((data) => setServices(data));
   }, []);
    
+  const handleCheckout = (id) => {
+    navigate(`/services/${id}`)
+  }
   return (
     <Container className="d-flex my-5 justify-content-center align-items-center">
     <Row xs={1} md={3} className="g-4">
@@ -31,7 +36,7 @@ const Services = () => {
           <p className="mx-3">{service.description}</p>
           <p>Price : $ {service.price}</p>
         </div>
-        <Button variant="primary mb-2 w-75" size="lg">View More</Button>
+        <Button onClick={()=>handleCheckout(service.id)} variant="primary mb-2 w-75" size="lg">Check out</Button>
         </Card>
       </Col>)}
         

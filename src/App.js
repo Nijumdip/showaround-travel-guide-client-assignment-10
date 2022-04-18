@@ -8,22 +8,31 @@ import Login from "./Components/Pages/Login/Login";
 import Services from "./Components/Pages/Services/Services";
 import PageNotFound from "./Components/Shared/PageNotFound/PageNotFound";
 import SignUp from "./Components/Pages/Login/SignUp";
-
+import RequireAuth from "./Components/Pages/Login/RequireAuth";
 
 function App() {
   return (
     <div className="App">
-    <BrowserRouter>
-      <Header></Header>
+      <BrowserRouter>
+        <Header></Header>
         <Routes>
-          <Route path="/" element={<Home/>}/>
-          <Route path="/home" element={<Home/>}/>
-          <Route path="/services" element={<Services/>}/>
-          <Route path="/checkout" element={<CheckOut/>}/>
-          <Route path="/blog" element={<Blog/>}/>
-          <Route path="/login" element={<Login/>}/>
-          <Route path="/signup" element={<SignUp/>}/>
-          <Route path="*" element={<PageNotFound/>}/>
+          <Route path="/" element={<Home />} />
+          <Route path="/home" element={<Home />} />
+          <Route path="/home/services/:homeId" element={<CheckOut />} />
+          <Route path="/services" element={<Services />} />
+          <Route path="/services/:servicesId" element={<CheckOut />} />
+          <Route
+            path="/checkout"
+            element={
+              <RequireAuth>
+                <CheckOut />
+              </RequireAuth>
+            }
+          />
+          <Route path="/blog" element={<Blog />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="*" element={<PageNotFound />} />
         </Routes>
       </BrowserRouter>
     </div>

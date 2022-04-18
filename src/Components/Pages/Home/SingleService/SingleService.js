@@ -1,9 +1,9 @@
 import React from "react";
 import { Button, Card, Col } from "react-bootstrap";
 
-const SingleService = ({ service }) => {
+const SingleService = ({ service, handleCheckOut }) => {
   console.log(service);
-  const { img, name, description, price } = service;
+  const { id, img, name, description, price } = service;
   return (
     <Col>
       <Card className="d-flex flex-column justify-content-center align-items-center ">
@@ -22,7 +22,7 @@ const SingleService = ({ service }) => {
           <p className="mx-3">{description}</p>
           <p>Price : $ {price}</p>
         </div>
-        <Button variant="primary mb-2 w-75" size="lg">View More</Button>
+        <Button onClick={()=>handleCheckOut(id)} variant="primary mb-2 w-75" size="lg">View More</Button>
       </Card>
     </Col>
   );
