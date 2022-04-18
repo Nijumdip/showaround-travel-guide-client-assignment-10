@@ -1,26 +1,32 @@
-import React from "react";
-import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
+import { updateProfile } from "firebase/auth";
+import React, { useState } from "react";
+import { useCreateUserWithEmailAndPassword, useUpdateProfile } from "react-firebase-hooks/auth";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import auth from "../../../firebase.init";
 import SocialLogin from "./SocialLogin";
 
 const SignUp = () => {
+  const [agree, setAgree] = useState(false);
   const [createUserWithEmailAndPassword, user, loading, error] =
-    useCreateUserWithEmailAndPassword(auth);
+    useCreateUserWithEmailAndPassword(auth, {sendEmailVerification:true});
+  const [updateProfile, updating, updateError] = useUpdateProfile(auth);
   const navigate = useNavigate();
   const location = useLocation();
-  const navigateUrl = location?.state?.from || "/home";
+  const from = location?.state?.from || "/home";
 
   if (user) {
-    navigate(navigateUrl);
+    navigate(from, { replace: true });
   }
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const name = event.target.name.value;
     const email = event.target.email.value;
     const password = event.target.password.value;
-    createUserWithEmailAndPassword(email, password);
+    //   const agree = event.target.terms.checked;
+ 
+    await createUserWithEmailAndPassword(email, password);
+    await updateProfile({ displayName: name });
   };
 
   return (
@@ -60,13 +66,16 @@ const SignUp = () => {
         </div>
         <div className="mb-3 form-check">
           <input
+            onClick={()=>setAgree(!agree)}
             type="checkbox"
             className="form-check-input"
             name="terms"
             id="exampleCheck1"
           />
 
-          <label htmlFor="exampleCheck1">
+          <label
+            className={`ps-2 ${agree ? '' : 'text-danger'}`}
+           htmlFor="exampleCheck1">
             Accept Showaround Travel Guide Terms and Conditions
           </label>
         </div>

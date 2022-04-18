@@ -1,6 +1,9 @@
 import React, { useRef } from "react";
 import { Button, Form } from "react-bootstrap";
-import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
+import {
+  useSendPasswordResetEmail,
+  useSignInWithEmailAndPassword,
+} from "react-firebase-hooks/auth";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import auth from "../../../firebase.init";
 import SocialLogin from "./SocialLogin";
@@ -10,19 +13,28 @@ const Login = () => {
   const passwordRef = useRef("");
   const navigate = useNavigate();
   const location = useLocation();
-  const navigateUrl = location?.state?.from || "/home";
-  const [
-    signInWithEmailAndPassword,
-    user,
-    loading,
-    error,
-  ] = useSignInWithEmailAndPassword(auth);
+  let from = location?.state?.from || "/home";
+  const [signInWithEmailAndPassword, user, loading, error] =
+    useSignInWithEmailAndPassword(auth);
+  const [sendPasswordResetEmail, sending] = useSendPasswordResetEmail(auth);
+  let errorElement;
 
-
+  if (error) {
+    errorElement = (
+      <div>
+        <p className="text-danger"> Error: {error?.message}</p>
+      </div>
+    );
+  }
 
   if (user) {
-    navigate(navigateUrl);
+    navigate(from, { replace: true });
   }
+
+  const resetPassword = async () => {
+    await sendPasswordResetEmail(emailRef);
+    alert("Sent email");
+  };
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -30,7 +42,6 @@ const Login = () => {
     const password = passwordRef.current.value;
     signInWithEmailAndPassword(email, password);
   };
-
 
   return (
     <div className="container w-50 mx-auto m-5">
@@ -56,18 +67,19 @@ const Login = () => {
           Login
         </Button>
       </Form>
+      {errorElement}
       <p>
         New To Showaround Travel Guide ?
-        <Link
-          to="/signup"
-          className="text-primary text-decoration-none"
-        >
+        <Link to="/signup" className="text-primary text-decoration-none">
           Please Register
         </Link>
       </p>
       <p>
         Forget Password ?
-        <button className="btn btn-link text-primary text-decoration-none">
+        <button
+          onClick={resetPassword}
+          className="btn btn-link text-primary text-decoration-none"
+        >
           Reset Password
         </button>
       </p>
