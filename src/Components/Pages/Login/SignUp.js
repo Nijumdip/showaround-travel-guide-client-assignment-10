@@ -1,31 +1,28 @@
 import React from "react";
 import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import auth from "../../../firebase.init";
 import SocialLogin from "./SocialLogin";
 
 const SignUp = () => {
-    const [
-        createUserWithEmailAndPassword,
-        user,
-        loading,
-        error,
-    ] = useCreateUserWithEmailAndPassword(auth);
-    const navigate = useNavigate();
-    
+  const [createUserWithEmailAndPassword, user, loading, error] =
+    useCreateUserWithEmailAndPassword(auth);
+  const navigate = useNavigate();
+  const location = useLocation();
+  const navigateUrl = location?.state?.from || "/home";
 
-    if (user) {
-        navigate('/home');  
-    }
+  if (user) {
+    navigate(navigateUrl);
+  }
 
-    const handleSubmit =(event) => {
-        event.preventDefault();
-        const name = event.target.name.value;
-        const email = event.target.email.value;
-        const password = event.target.password.value;
-        createUserWithEmailAndPassword(email, password);
-    }
-  
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const name = event.target.name.value;
+    const email = event.target.email.value;
+    const password = event.target.password.value;
+    createUserWithEmailAndPassword(email, password);
+  };
+
   return (
     <div className="container w-50 mx-auto m-5">
       <h2 className="text-primary text-center"> Please SignUp</h2>
@@ -42,7 +39,6 @@ const SignUp = () => {
         </div>
         <div className="mb-3">
           <input
-            
             type="email"
             className="form-control"
             name="email"
@@ -54,7 +50,6 @@ const SignUp = () => {
         </div>
         <div className="mb-3">
           <input
-          
             type="password"
             className="form-control"
             name="password"

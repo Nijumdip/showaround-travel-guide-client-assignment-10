@@ -1,18 +1,18 @@
 import React from "react";
 import { Button, Card, Col } from "react-bootstrap";
+import './SingleService.css'
 
 const SingleService = ({ service, handleCheckOut }) => {
-  console.log(service);
   const { id, img, name, description, price } = service;
   return (
     <Col>
-      <Card className="d-flex flex-column justify-content-center align-items-center ">
+      <Card>
         <div>
           <img
             className="m-3 rounded-3"
             variant="top"
             src={img}
-            width="330px"
+            width="320px"
             height="350px"
             alt="img not found"
           />
@@ -22,7 +22,9 @@ const SingleService = ({ service, handleCheckOut }) => {
           <p className="mx-3">{description}</p>
           <p>Price : $ {price}</p>
         </div>
+        <div className="d-flex flex-column justify-content-center align-items-center ">
         <Button onClick={()=>handleCheckOut(id)} variant="primary mb-2 w-75" size="lg">View More</Button>
+        </div>
       </Card>
     </Col>
   );

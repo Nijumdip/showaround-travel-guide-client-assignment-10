@@ -9,6 +9,7 @@ import Services from "./Components/Pages/Services/Services";
 import PageNotFound from "./Components/Shared/PageNotFound/PageNotFound";
 import SignUp from "./Components/Pages/Login/SignUp";
 import RequireAuth from "./Components/Pages/Login/RequireAuth";
+import AboutMe from "./Components/Pages/AboutMe/AboutMe";
 
 function App() {
   return (
@@ -18,9 +19,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/home" element={<Home />} />
-          <Route path="/home/services/:homeId" element={<CheckOut />} />
           <Route path="/services" element={<Services />} />
-          <Route path="/services/:servicesId" element={<CheckOut />} />
           <Route
             path="/checkout"
             element={
@@ -30,6 +29,7 @@ function App() {
             }
           />
           <Route path="/blog" element={<Blog />} />
+          <Route path="/about" element={<AboutMe />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="*" element={<PageNotFound />} />

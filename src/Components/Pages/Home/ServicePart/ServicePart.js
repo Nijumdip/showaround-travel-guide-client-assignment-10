@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Container, Row } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
-import Services from "../../Services/Services";
 import SingleService from "../SingleService/SingleService";
 
 const ServicePart = () => {
@@ -14,7 +13,7 @@ const ServicePart = () => {
       .then((data) => setServices(data));
   }, []);
   const handleCheckOut = (id) => {
-    navigate(`/services/${id}`)
+    navigate(`/services`)
   }
   return (
     <div>

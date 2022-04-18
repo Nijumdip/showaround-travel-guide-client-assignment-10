@@ -1,0 +1,22 @@
+.header{
+	background-color:#e4f9f5;
+}
+
+h1,h2,h3,h4,h5,h6{
+	color:#11999e;
+}
+.header-contact a{
+	color:teal;
+	text-decoration:none;
+	font-weight:bold;
+}
+.header-contact a:hover{
+	text-decoration:underline;
+	color:tomato;
+}
+hr{
+	width:100%;
+	margin:20px auto;
+	border:solid black 3px;
+	border-bottom:none;
+}
