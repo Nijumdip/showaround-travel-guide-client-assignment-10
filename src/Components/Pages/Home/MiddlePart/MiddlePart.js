@@ -24,7 +24,7 @@ const MiddlePart = () => {
             <img className="rounded-3"
             width={"350px"}
             height={"450px"}
-            src="http://quickdevs.com/demo/travi/images/commons/travi-1.jpg"
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTTPPrgzJ8-vtZWsksC4ty5yVWQKpaR_faKNg&usqp=CAU"
             alt=""/>
       </div>
     </div>

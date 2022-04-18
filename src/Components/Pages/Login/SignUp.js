@@ -1,10 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import SocialLogin from './SocialLogin';
 
 const SignUp = () => {
     return (
         <div className="container w-50 mx-auto m-5">
-            <h2 className="text-primary text-center"> Please Register</h2>
+            <h2 className="text-primary text-center"> Please SignUp</h2>
             <form>
                 <div className="mb-3">
                     <input type="text" className="form-control" name='name' id="exampleInputName1" placeholder="Your Name" required/>
@@ -24,7 +25,7 @@ const SignUp = () => {
                 
             </form>
             <p>Already Have an Account ? <Link to='/login' className='text-primary text-decoration-none'>Please Login</Link></p>
-                
+            <SocialLogin></SocialLogin>  
         </div>
     );
 };

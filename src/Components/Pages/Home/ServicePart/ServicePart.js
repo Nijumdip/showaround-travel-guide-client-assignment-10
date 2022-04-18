@@ -13,7 +13,7 @@ const ServicePart = () => {
   }, []);
   return (
     <div>
-      <h2 className="mt-5 mb-4 text-center text-primary">Our Services</h2>
+      <h2 className="mt-5 mb-4 text-center text-primary">My Services</h2>
       <Container className="d-flex justify-content-center align-items-center">
           <Row xs={1} md={3} className="g-4">
             {
